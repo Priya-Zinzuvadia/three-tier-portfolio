@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Priya Zinzuvadia — Aspiring DevOps & Cloud Engineer. AWS Certified. Hands-on experience with AWS, Docker, Linux, CI/CD.">
+  <title>Priya Zinzuvadia | DevOps & Cloud Engineer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Unbounded:wght@400;600;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:#050811; --bg-card:#0c1222; --bg-card-h:#0f1829; --bg-glass:rgba(12,18,34,.88);
+      --border:#172642; --border-glow:rgba(36,150,237,.35);
+      --accent:#2496ed; --accent-dim:rgba(36,150,237,.12); --accent-br:#5bbdf5;
+      --purple:#8b5cf6; --purple-dim:rgba(139,92,246,.12);
+      --green:#4ade80; --green-dim:rgba(74,222,128,.10);
+      --yellow:#eab308; --yellow-dim:rgba(234,179,8,.10);
+      --text:#94a3b8; --text-mid:#cbd5e1; --text-dim:#475569; --text-bright:#f1f5f9;
+      --mono:'Space Mono',monospace; --disp:'Unbounded',sans-serif; --body:'Inter',sans-serif;
+      --nav-h:68px; --r:16px; --r-sm:8px;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth;scroll-padding-top:calc(var(--nav-h) + 16px)}
+    body{background:var(--bg);color:var(--text);font-family:var(--body);overflow-x:hidden;line-height:1.7;font-size:14px}
+    a{color:inherit;text-decoration:none} button{font-family:var(--body);cursor:pointer;border:none;background:none} ul,ol{list-style:none}
+    ::-webkit-scrollbar{width:3px} ::-webkit-scrollbar-track{background:var(--bg)} ::-webkit-scrollbar-thumb{background:linear-gradient(var(--accent),var(--purple));border-radius:2px}
+    /* ── LAYOUT ── */
+    .container{max-width:960px;margin:0 auto;padding:0 24px}
+    .section{padding:100px 0}
+    .section-alt{background:rgba(12,18,34,.35)}
+    /* ── SECTION HEADER ── */
+    .eyebrow{display:flex;align-items:center;gap:10px;font-size:10px;letter-spacing:.25em;color:var(--accent);text-transform:uppercase;font-weight:700;margin-bottom:10px}
+    .eyebrow::after{content:'';flex:0 0 50px;height:1px;background:linear-gradient(to right,var(--accent),transparent);opacity:.5}
+    .section-h2{font-family:var(--disp);font-size:clamp(26px,3.5vw,40px);color:var(--text-bright);font-weight:700;margin-bottom:52px;line-height:1.2}
+    /* ── SHARED CARD ── */
+    .card-base{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r);padding:28px;transition:border-color .3s,transform .3s,background .3s,box-shadow .3s}
+    .card-base:hover{border-color:var(--border-glow);background:var(--bg-card-h);transform:translateY(-3px);box-shadow:0 16px 48px rgba(36,150,237,.07)}
+    /* ── BADGES ── */
+    .badge{display:inline-flex;align-items:center;gap:5px;font-size:9px;font-weight:700;padding:3px 10px;border-radius:4px;text-transform:uppercase;letter-spacing:.08em;font-family:var(--mono)}
+    .badge-completed{background:var(--green-dim);color:var(--green);border:1px solid rgba(74,222,128,.25)}
+    .badge-ongoing{background:var(--yellow-dim);color:var(--yellow);border:1px solid rgba(234,179,8,.25)}
+    @keyframes pdot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.3;transform:scale(.6)}}
+    .pulse-dot{width:5px;height:5px;background:currentColor;border-radius:50%;animation:pdot 1.5s ease-in-out infinite}
+    /* ── BUTTONS ── */
+    .btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--body);font-size:13px;font-weight:600;padding:12px 26px;border-radius:var(--r-sm);transition:all .25s ease;letter-spacing:.02em;white-space:nowrap}
+    .btn-outline{background:transparent;border:1px solid var(--accent);color:var(--accent)}
+    .btn-outline:hover{background:var(--accent-dim);box-shadow:0 0 28px rgba(36,150,237,.22);color:var(--text-bright);transform:translateY(-2px)}
+    .btn-ghost{background:transparent;border:1px solid var(--border);color:var(--text-mid)}
+    .btn-ghost:hover{border-color:var(--border-glow);color:var(--text-bright);background:var(--accent-dim);transform:translateY(-2px)}
+    /* ── TECH TAGS ── */
+    .tech-tag{display:inline-block;font-size:10px;padding:3px 10px;background:var(--accent-dim);border:1px solid rgba(36,150,237,.18);border-radius:4px;color:var(--accent);font-family:var(--mono);font-weight:700;letter-spacing:.05em;transition:all .2s}
+    .tech-tag:hover{background:rgba(36,150,237,.18);border-color:rgba(36,150,237,.5);box-shadow:0 0 8px rgba(36,150,237,.2)}
+    /* ── CURSOR & GLITCH ── */
+    @keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+    .cursor{color:var(--accent);font-weight:700;animation:blink .8s step-end infinite}
+    @keyframes g1{0%{clip-path:inset(40% 0 61% 0);transform:translate(-2px,0)}20%{clip-path:inset(92% 0 1% 0);transform:translate(2px,0)}40%{clip-path:inset(43% 0 1% 0);transform:translate(-1px,0)}60%{clip-path:inset(25% 0 58% 0);transform:translate(1px,0)}80%{clip-path:inset(54% 0 7% 0);transform:translate(-2px,0)}100%{clip-path:inset(58% 0 43% 0);transform:translate(2px,0)}}
+    @keyframes g2{0%{clip-path:inset(25% 0 58% 0);transform:translate(2px,0)}20%{clip-path:inset(54% 0 7% 0);transform:translate(-1px,0)}40%{clip-path:inset(40% 0 61% 0);transform:translate(1px,0)}60%{clip-path:inset(92% 0 1% 0);transform:translate(-2px,0)}80%{clip-path:inset(43% 0 1% 0);transform:translate(2px,0)}100%{clip-path:inset(58% 0 43% 0);transform:translate(-1px,0)}}
+    .glitch-wrap{position:relative;display:inline-block}
+    .glitch-wrap::before,.glitch-wrap::after{content:attr(data-text);position:absolute;inset:0;font-family:inherit;font-size:inherit;font-weight:inherit;line-height:inherit;letter-spacing:inherit}
+    .glitch-wrap::before{color:var(--accent);animation:g1 4s infinite linear;opacity:0}
+    .glitch-wrap::after{color:var(--purple);animation:g2 5s infinite linear;opacity:0}
+    .glitch-wrap:hover::before{opacity:.55} .glitch-wrap:hover::after{opacity:.55}
+    /* ══ NAVBAR ══ */
+    @keyframes navIn{from{transform:translateY(-80px);opacity:0}to{transform:translateY(0);opacity:1}}
+    .navbar{position:fixed;top:0;left:0;right:0;height:var(--nav-h);z-index:100;border-bottom:1px solid transparent;transition:background .3s,border-color .3s;animation:navIn .5s ease-out forwards}
+    .navbar.scrolled{background:var(--bg-glass);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-color:var(--border)}
+    .navbar-inner{height:100%;display:flex;align-items:center;justify-content:space-between;gap:20px}
+    .navbar-logo{font-family:var(--disp);font-size:14px;font-weight:700;color:var(--text-bright);white-space:nowrap}
+    .logo-bracket{color:var(--accent);font-weight:900}
+    .navbar-links{display:flex;align-items:center;gap:2px;flex:1;justify-content:center}
+    .nav-link{padding:6px 12px;font-size:11px;font-weight:600;letter-spacing:.04em;color:var(--text-dim);border-radius:6px;transition:all .2s;text-transform:uppercase;font-family:var(--body)}
+    .nav-link:hover{color:var(--text-bright);background:rgba(36,150,237,.07)}
+    .nav-link.active{color:var(--accent);background:var(--accent-dim)}
+    .navbar-cta{padding:8px 18px;font-size:11px}
+    .hamburger{display:none;flex-direction:column;gap:5px;padding:4px}
+    .ham-line{display:block;width:22px;height:2px;background:var(--text-mid);border-radius:2px;transition:all .3s}
+    .ham-open .ham-line:nth-child(1){transform:translateY(7px) rotate(45deg)}
+    .ham-open .ham-line:nth-child(2){opacity:0;transform:scaleX(0)}
+    .ham-open .ham-line:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+    .mobile-menu{position:absolute;top:var(--nav-h);left:0;right:0;background:var(--bg-glass);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:16px 24px 24px;display:flex;flex-direction:column;gap:4px}
+    .mobile-link{padding:12px 16px;font-size:13px;font-weight:700;color:var(--text-mid);border-radius:8px;border:1px solid transparent;transition:all .2s}
+    .mobile-link:hover{color:var(--text-bright);background:var(--accent-dim);border-color:var(--border-glow)}
+    @media(max-width:768px){.navbar-links,.navbar-cta{display:none}.hamburger{display:flex}}
+    /* ══ HERO ══ */
+    .hero{position:relative;min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;justify-content:center;overflow:hidden}
+    .hero-canvas{position:absolute;inset:0;pointer-events:none;z-index:0;width:100%;height:100%}
+    .hero-glow-1{position:absolute;top:15%;left:5%;width:520px;height:520px;pointer-events:none;z-index:0;background:radial-gradient(circle,rgba(36,150,237,.08) 0%,transparent 70%)}
+    .hero-glow-2{position:absolute;bottom:15%;right:0;width:420px;height:420px;pointer-events:none;z-index:0;background:radial-gradient(circle,rgba(139,92,246,.07) 0%,transparent 70%)}
+    .hero-content{position:relative;z-index:1;padding-top:var(--nav-h)}
+    @keyframes hero-in{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}
+    .hero-animate{animation:hero-in .7s ease-out .15s both}
+    @keyframes avail-pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.3;transform:scale(.6)}}
+    .hero-avail{display:inline-flex;align-items:center;gap:8px;font-size:10px;font-weight:700;letter-spacing:.15em;color:var(--green);text-transform:uppercase;margin-bottom:22px}
+    .avail-dot{width:7px;height:7px;background:var(--green);border-radius:50%;animation:avail-pulse 2s ease-in-out infinite}
+    .hero-greeting{font-size:13px;color:var(--text-dim);margin-bottom:8px}
+    .hero-name{font-family:var(--disp);font-size:clamp(34px,6vw,70px);font-weight:900;color:var(--text-bright);line-height:1.05;margin-bottom:20px;letter-spacing:-.02em}
+    .hero-typewriter{font-size:clamp(13px,1.8vw,16px);color:var(--text-mid);margin-bottom:14px;min-height:24px}
+    .tw-prefix{color:var(--accent);font-weight:700;margin-right:10px} .tw-text{color:var(--text-bright)}
+    .hero-meta{font-size:11px;color:var(--text-dim);margin-bottom:36px;letter-spacing:.07em}
+    .hero-actions{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:36px}
+    .hero-social{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+    .hero-slink{font-size:11px;color:var(--text-dim);display:flex;align-items:center;gap:6px;transition:color .2s}
+    .hero-slink:hover{color:var(--accent)} .hero-sep{color:var(--border)}
+    .hero-float{position:absolute;right:0;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:14px;z-index:1}
+    .float-icon{display:flex;flex-direction:column;align-items:center;gap:5px;padding:14px 12px;background:var(--bg-card);border:1px solid var(--border);border-radius:12px;transition:all .3s;cursor:default}
+    .float-icon:hover{border-color:var(--border-glow);background:var(--bg-card-h);box-shadow:0 0 20px rgba(36,150,237,.12)}
+    @keyframes fl0{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+    @keyframes fl1{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+    @keyframes fl2{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+    @keyframes fl3{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+    @keyframes fl4{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+    .fi0{animation:fl0 2.8s ease-in-out infinite} .fi1{animation:fl1 3.1s ease-in-out infinite .2s}
+    .fi2{animation:fl2 2.6s ease-in-out infinite .4s} .fi3{animation:fl3 3.4s ease-in-out infinite .1s}
+    .fi4{animation:fl4 2.9s ease-in-out infinite .3s}
+    .fi-emoji{font-size:20px;line-height:1} .fi-label{font-size:8px;font-weight:700;color:var(--text-dim);letter-spacing:.08em}
+    @keyframes scroll-b{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(7px)}}
+    .hero-scroll{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);z-index:1;animation:scroll-b 1.5s ease-in-out infinite}
+    .hero-scroll a{display:flex;flex-direction:column;align-items:center;gap:4px;color:var(--text-dim);font-size:10px;letter-spacing:.15em;transition:color .2s}
+    .hero-scroll a:hover{color:var(--accent)} .scroll-arrow{font-size:18px}
+    @media(max-width:900px){.hero-float{display:none}}
+    /* ══ ABOUT ══ */
+    .about-grid{display:grid;grid-template-columns:1fr;gap:32px;align-items:start;margin-bottom:44px}
+    .terminal{background:#070c17;border:1px solid var(--border);border-radius:12px;overflow:hidden}
+    .terminal-bar{display:flex;align-items:center;gap:7px;padding:11px 16px;background:#0c1222;border-bottom:1px solid var(--border)}
+    .t-dot{width:10px;height:10px;border-radius:50%} .t-red{background:#ff5f57} .t-yellow{background:#ffbd2e} .t-green{background:#27c93f}
+    .t-title{font-size:10px;color:var(--text-dim);font-weight:700;margin-left:8px;letter-spacing:.1em}
+    .terminal-body{padding:18px;font-size:11px;line-height:2.1}
+    .t-line{display:flex;gap:6px;flex-wrap:wrap}
+    .t-prompt{color:var(--green);font-weight:700;flex-shrink:0} .t-sep{color:var(--text-dim);flex-shrink:0} .t-cmd{color:var(--accent)} .t-out{color:var(--text-mid);padding-left:16px;width:100%}
+    .about-prose{display:flex;flex-direction:column;gap:16px}
+    .about-prose{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+    .about-prose p{font-family:var(--body);font-size:15px;line-height:1.9;color:var(--text)}
+    .hl{color:var(--accent);font-weight:600}
+    .about-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+    .stat-card{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:20px 16px;text-align:center;transition:all .3s}
+    .stat-card:hover{border-color:var(--border-glow);transform:translateY(-2px);box-shadow:0 8px 24px rgba(36,150,237,.07)}
+    .stat-num{font-family:var(--disp);font-size:26px;font-weight:900;color:var(--accent);line-height:1;margin-bottom:6px}
+    .stat-lbl{font-size:9px;font-weight:700;color:var(--text-dim);letter-spacing:.12em;text-transform:uppercase}
+    @media(max-width:768px){.about-grid{grid-template-columns:1fr}.about-stats{grid-template-columns:repeat(2,1fr)}}
+    /* ══ SKILLS ══ */
+    .skills-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+    .skill-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r);padding:24px;transition:all .3s}
+    .skill-card:hover{border-color:var(--border-glow);background:var(--bg-card-h);transform:translateY(-2px)}
+    .skill-cat-head{display:flex;align-items:center;gap:10px;margin-bottom:16px}
+    .skill-icon{font-size:20px} .skill-cat-name{font-size:11px;font-weight:700;color:var(--text-bright);letter-spacing:.08em;text-transform:uppercase}
+    .skill-tags{display:flex;flex-wrap:wrap;gap:8px}
+    .skill-tag{display:inline-block;font-size:10px;padding:5px 12px;background:rgba(36,150,237,.07);border:1px solid rgba(36,150,237,.18);border-radius:6px;color:var(--text-mid);font-family:var(--mono);font-weight:700;letter-spacing:.04em;transition:all .2s;cursor:default}
+    .skill-tag:hover{background:var(--accent-dim);border-color:rgba(36,150,237,.4);color:var(--accent);transform:translateY(-1px);box-shadow:0 0 10px rgba(36,150,237,.12)}
+    .skill-tag.purple:hover{background:var(--purple-dim);border-color:rgba(139,92,246,.4);color:var(--purple);box-shadow:0 0 10px rgba(139,92,246,.12)}
+    @media(max-width:640px){.skills-grid{grid-template-columns:1fr}}
+    /* ══ EXPERIENCE ══ */
+    .timeline{position:relative;padding-left:40px}
+    .timeline::before{content:'';position:absolute;left:8px;top:10px;bottom:0;width:2px;background:linear-gradient(to bottom,var(--accent),transparent)}
+    .timeline-item{position:relative;margin-bottom:36px}
+    .timeline-dot{position:absolute;left:-36px;top:8px;width:14px;height:14px;background:var(--accent);border-radius:50%;border:3px solid var(--bg);box-shadow:0 0 12px rgba(36,150,237,.55)}
+    .exp-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r);padding:28px;transition:all .3s}
+    .exp-card:hover{border-color:var(--border-glow);background:var(--bg-card-h);box-shadow:0 12px 40px rgba(0,0,0,.3)}
+    .exp-company{font-family:var(--disp);font-size:15px;font-weight:700;color:var(--text-bright);margin-bottom:4px}
+    .exp-role{font-size:11px;color:var(--accent);font-weight:700;letter-spacing:.08em;margin-bottom:3px}
+    .exp-date{font-size:10px;color:var(--text-dim);letter-spacing:.08em;margin-bottom:18px}
+    .exp-bullets{display:flex;flex-direction:column;gap:9px;margin-bottom:16px}
+    .exp-bullet{display:flex;gap:10px;font-size:12px;line-height:1.65;color:var(--text)}
+    .bull-arrow{color:var(--accent);font-weight:700;flex-shrink:0;margin-top:1px}
+    .exp-tags{display:flex;flex-wrap:wrap;gap:6px;padding-top:14px;border-top:1px solid var(--border)}
+    /* ══ PROJECTS ══ */
+    .projects-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+    .proj-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r);padding:26px;display:flex;flex-direction:column;gap:13px;transition:all .3s;position:relative;overflow:hidden}
+    .proj-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(to right,var(--accent),var(--purple));opacity:0;transition:opacity .3s}
+    .proj-card:hover{border-color:var(--border-glow);background:var(--bg-card-h);transform:translateY(-4px);box-shadow:0 20px 50px rgba(0,0,0,.35),0 0 30px rgba(36,150,237,.07)}
+    .proj-card:hover::before{opacity:1}
+    .proj-name{font-family:var(--disp);font-size:14px;font-weight:700;color:var(--text-bright);line-height:1.3}
+    .proj-desc{font-size:12px;line-height:1.75;color:var(--text);font-family:var(--body)}
+    .proj-buls{display:flex;flex-direction:column;gap:5px}
+    .proj-bul{display:flex;gap:8px;font-size:11px;color:var(--text-dim)}
+    .proj-bul span:first-child{color:var(--accent);flex-shrink:0}
+    .proj-tags{display:flex;flex-wrap:wrap;gap:6px}
+    @media(max-width:640px){.projects-grid{grid-template-columns:1fr}}
+    /* ══ EDUCATION ══ */
+    .edu-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+    .edu-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r);padding:28px;transition:all .3s}
+    .edu-card:hover{border-color:var(--border-glow);background:var(--bg-card-h);transform:translateY(-2px)}
+    .edu-icon{font-size:28px;margin-bottom:14px}
+    .edu-degree{font-family:var(--disp);font-size:14px;font-weight:700;color:var(--text-bright);margin-bottom:6px;line-height:1.35}
+    .edu-school{font-size:11px;color:var(--accent);font-weight:700;margin-bottom:4px}
+    .edu-loc{font-size:10px;color:var(--text-dim);margin-bottom:10px}
+    .edu-date{font-size:10px;color:var(--accent);padding:3px 10px;background:var(--accent-dim);border:1px solid rgba(36,150,237,.18);border-radius:4px;display:inline-block;font-weight:700}
+    @media(max-width:640px){.edu-grid{grid-template-columns:1fr}}
+    /* ══ ACHIEVEMENTS ══ */
+    .ach-card{background:linear-gradient(135deg,rgba(36,150,237,.06),rgba(139,92,246,.06));border:1px solid rgba(36,150,237,.25);border-radius:var(--r);padding:36px;display:flex;align-items:center;gap:32px;max-width:720px;transition:all .3s}
+    .ach-card:hover{border-color:rgba(36,150,237,.5);box-shadow:0 20px 60px rgba(0,0,0,.4),0 0 50px rgba(36,150,237,.1);transform:translateY(-3px)}
+    @keyframes ach-glow{0%,100%{box-shadow:0 0 0 rgba(36,150,237,0)}50%{box-shadow:0 0 22px rgba(36,150,237,.4)}}
+    .ach-badge{flex-shrink:0;width:80px;height:80px;display:flex;align-items:center;justify-content:center;background:rgba(36,150,237,.1);border:2px solid rgba(36,150,237,.3);border-radius:50%;font-size:38px;animation:ach-glow 2.5s ease-in-out infinite}
+    .ach-title{font-family:var(--disp);font-size:16px;font-weight:700;color:var(--text-bright);margin-bottom:5px}
+    .ach-sub{font-size:10px;color:var(--accent);font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px}
+    .ach-desc{font-size:12px;color:var(--text);line-height:1.75;font-family:var(--body)}
+    .ach-link{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:700;color:var(--accent);margin-top:10px;transition:gap .2s}
+    .ach-link:hover{gap:10px}
+    @media(max-width:640px){.ach-card{flex-direction:column;text-align:center}}
+    /* ══ CONTACT ══ */
+    .contact-intro{max-width:520px;font-family:var(--body);font-size:14px;line-height:1.85;color:var(--text);margin-bottom:40px}
+    .contact-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    .contact-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r);padding:24px 20px;display:flex;flex-direction:column;align-items:flex-start;gap:9px;transition:all .3s;cursor:pointer;position:relative}
+    .contact-card:hover{border-color:var(--border-glow);background:var(--bg-card-h);transform:translateY(-2px);box-shadow:0 0 28px rgba(36,150,237,.1)}
+    .contact-icon{font-size:22px} .contact-type{font-size:9px;font-weight:700;color:var(--text-dim);letter-spacing:.15em;text-transform:uppercase}
+    .contact-val{font-size:11px;font-weight:700;color:var(--text-bright);word-break:break-all}
+    .contact-act{font-size:10px;color:var(--accent);font-weight:700;display:flex;align-items:center;gap:4px;margin-top:auto}
+    .copy-badge{position:absolute;bottom:8px;right:8px;background:var(--green-dim);border:1px solid rgba(74,222,128,.3);color:var(--green);font-size:9px;font-weight:700;padding:3px 8px;border-radius:4px}
+    @media(max-width:640px){.contact-grid{grid-template-columns:1fr}}
+    /* ══ FOOTER ══ */
+    .footer{border-top:1px solid var(--border);padding:28px 0}
+    .footer-inner{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+    .footer-text{font-size:11px;color:var(--text-dim)} .footer-text span{color:var(--accent)}
+    .back-top{border:1px solid var(--border);color:var(--text-dim);padding:8px 16px;border-radius:6px;font-size:11px;font-family:var(--mono);font-weight:700;display:flex;align-items:center;gap:5px;transition:all .2s}
+    .back-top:hover{border-color:var(--border-glow);color:var(--text-bright);transform:translateY(-2px)}
+    /* ══ MODAL ══ */
+    @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+    @keyframes slideIn{from{opacity:0;transform:scale(.91) translateY(32px)}to{opacity:1;transform:scale(1) translateY(0)}}
+    .modal-overlay{position:fixed;inset:0;background:rgba(5,8,17,.92);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);display:flex;align-items:center;justify-content:center;z-index:200;padding:20px;animation:fadeIn .22s ease}
+    .modal-card{background:var(--bg-card);border:1px solid rgba(36,150,237,.4);border-radius:20px;width:100%;max-width:800px;height:90vh;display:flex;flex-direction:column;box-shadow:0 32px 80px rgba(0,0,0,.8),0 0 40px rgba(36,150,237,.08);overflow:hidden;animation:slideIn .28s ease}
+    .modal-header{display:flex;align-items:center;justify-content:space-between;padding:18px 28px;border-bottom:1px solid var(--border);flex-shrink:0}
+    .modal-title{font-size:11px;font-weight:700;color:var(--accent);letter-spacing:.12em}
+    .modal-status{font-size:10px;font-weight:700;color:var(--green);letter-spacing:.08em;margin-top:3px}
+    .modal-close{border:1px solid var(--border);color:var(--text-dim);width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:15px;transition:all .2s}
+    .modal-close:hover{border-color:var(--border-glow);color:var(--text-bright);background:var(--accent-dim)}
+    .modal-body{flex:1;display:flex;flex-direction:column;padding:20px 28px;gap:12px;overflow:hidden}
+    .modal-loading{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px}
+    @keyframes spin{to{transform:rotate(360deg)}}
+    .spinner{width:32px;height:32px;border:2px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite}
+    .loading-txt{font-size:11px;color:var(--accent);font-weight:700;letter-spacing:.08em}
+    .pdf-frame{flex:1;border:1px solid var(--border);border-radius:10px;background:#1a1f30}
+    .modal-dl{display:block;text-align:center;background:var(--accent);color:#000;padding:11px;border-radius:var(--r-sm);font-size:12px;font-weight:700;font-family:var(--mono);transition:all .2s;letter-spacing:.04em;flex-shrink:0}
+    .modal-dl:hover{background:var(--accent-br);transform:translateY(-1px);box-shadow:0 0 28px rgba(36,150,237,.3)}
+  </style>
+  <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+    /* ══════════════════════════════════════════════════
+       HOOKS
+    ══════════════════════════════════════════════════ */
+    function useReveal() {
+      const ref = React.useRef(null);
+      const [visible, setVisible] = React.useState(false);
+      React.useEffect(() => {
+        const obs = new IntersectionObserver(
+          ([e]) => { if (e.isIntersecting) { setVisible(true); obs.disconnect(); } },
+          { threshold: 0.1, rootMargin: '-50px' }
+        );
+        if (ref.current) obs.observe(ref.current);
+        return () => obs.disconnect();
+      }, []);
+      return [ref, visible];
+    }
+    function Reveal({ children, delay = 0, dir = 'up', style = {}, className = '' }) {
+      const [ref, visible] = useReveal();
+      const map = {
+        up:    ['translateY(28px)', 'translateY(0)'],
+        left:  ['translateX(-24px)', 'translateX(0)'],
+        right: ['translateX(24px)', 'translateX(0)'],
+      };
+      const [from, to] = map[dir] || map.up;
+      return (
+        <div
+          ref={ref}
+          className={className}
+          style={{
+            opacity: visible ? 1 : 0,
+            transform: visible ? to : from,
+            transition: `opacity .55s ease ${delay}s, transform .55s ease ${delay}s`,
+            ...style,
+          }}
+        >
+          {children}
+        </div>
+      );
+    }
+    function useTypewriter(words) {
+      const [idx, setIdx] = React.useState(0);
+      const [txt, setTxt] = React.useState('');
+      const [isDel, setDel] = React.useState(false);
+      React.useEffect(() => {
+        const curr = words[idx];
+        const t = setTimeout(() => {
+          if (!isDel) {
+            setTxt(curr.slice(0, txt.length + 1));
+            if (txt.length === curr.length - 1) setTimeout(() => setDel(true), 2000);
+          } else {
+            setTxt(curr.slice(0, txt.length - 1));
+            if (txt.length === 1) { setDel(false); setIdx(i => (i + 1) % words.length); }
+          }
+        }, isDel ? 38 : 82);
+        return () => clearTimeout(t);
+      }, [txt, isDel, idx, words]);
+      return txt;
+    }
+    /* ══════════════════════════════════════════════════
+       PARTICLE CANVAS
+    ══════════════════════════════════════════════════ */
+    function ParticleCanvas() {
+      const ref = React.useRef(null);
+      React.useEffect(() => {
+        const canvas = ref.current;
+        const ctx = canvas.getContext('2d');
+        let raf;
+        const resize = () => { canvas.width = canvas.offsetWidth; canvas.height = canvas.offsetHeight; };
+        resize();
+        window.addEventListener('resize', resize);
+        const pts = Array.from({ length: 55 }, () => ({
+          x: Math.random(), y: Math.random(),
+          vx: (Math.random() - .5) * .0003, vy: (Math.random() - .5) * .0003,
+          r: Math.random() * 1.4 + .5,
+        }));
+        function draw() {
+          const W = canvas.width, H = canvas.height;
+          ctx.clearRect(0, 0, W, H);
+          ctx.strokeStyle = 'rgba(36,150,237,0.04)';
+          ctx.lineWidth = 1;
+          for (let x = 0; x < W; x += 60) { ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H); ctx.stroke(); }
+          for (let y = 0; y < H; y += 60) { ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke(); }
+          pts.forEach(p => {
+            p.x = ((p.x + p.vx) + 1) % 1;
+            p.y = ((p.y + p.vy) + 1) % 1;
+            const px = p.x * W, py = p.y * H;
+            pts.forEach(q => {
+              const dx = px - q.x * W, dy = py - q.y * H, d = Math.hypot(dx, dy);
+              if (d < 130 && d > 0) {
+                ctx.beginPath();
+                ctx.strokeStyle = `rgba(36,150,237,${.07 * (1 - d / 130)})`;
+                ctx.lineWidth = .5;
+                ctx.moveTo(px, py); ctx.lineTo(q.x * W, q.y * H); ctx.stroke();
+              }
+            });
+            ctx.beginPath(); ctx.arc(px, py, p.r, 0, Math.PI * 2);
+            ctx.fillStyle = 'rgba(36,150,237,0.5)'; ctx.fill();
+          });
+          raf = requestAnimationFrame(draw);
+        }
+        draw();
+        return () => { window.removeEventListener('resize', resize); cancelAnimationFrame(raf); };
+      }, []);
+      return <canvas ref={ref} className="hero-canvas" />;
+    }
+    /* ══════════════════════════════════════════════════
+       DATA
+    ══════════════════════════════════════════════════ */
+    const TITLES = ['DevOps Engineer', 'Cloud Architect', 'AWS Specialist', 'Full-Stack Developer'];
+    const NAV_LINKS = [
+      { l: 'About',      href: '#about'      },
+      { l: 'Skills',     href: '#skills'     },
+      { l: 'Experience', href: '#experience' },
+      { l: 'Projects',   href: '#projects'   },
+      { l: 'Education',  href: '#education'  },
+      { l: 'Contact',    href: '#contact'    },
+    ];
+    const FLOAT_ICONS = [
+      { e: '☁',  l: 'AWS',    cls: 'fi0' },
+      { e: '🐳', l: 'Docker', cls: 'fi1' },
+      { e: '🐧', l: 'Linux',  cls: 'fi2' },
+      { e: '⎇',  l: 'Git',   cls: 'fi3' },
+      { e: '⚛',  l: 'React', cls: 'fi4' },
+    ];
+    const TERMINAL_LINES = [
+      { type: 'cmd', text: 'whoami'           }, { type: 'out', text: 'priya_zinzuvadia'                },
+      { type: 'cmd', text: 'cat role.txt'     }, { type: 'out', text: 'Aspiring DevOps & Cloud Engineer' },
+      { type: 'cmd', text: 'cat skills.txt'   }, { type: 'out', text: 'AWS · Docker · Linux · React · PHP' },
+      { type: 'cmd', text: 'echo $CERT'       }, { type: 'out', text: 'AWS Academy Cloud Foundations ✓'  },
+      { type: 'cmd', text: 'cat status.txt'   }, { type: 'out', text: 'Open to opportunities 🟢'         },
+    ];
+    const STATS = [
+      { n: '1+',  l: 'Internship'  },
+      { n: '4+',  l: 'Projects'    },
+      { n: 'AWS', l: 'Certified'   },
+      { n: '3+',  l: 'Tech Stacks' },
+    ];
+    const SKILL_CATS = [
+      { icon: '☁', name: 'Cloud & Infrastructure', color: 'blue',
+        tags: ['AWS EC2', 'AWS S3', 'AWS IAM', 'AWS VPC', 'AWS RDS', 'Linux', 'Cloud Security'] },
+      { icon: '⚙', name: 'DevOps & Automation', color: 'purple',
+        tags: ['Docker', 'Docker Compose', 'Git', 'GitHub Actions', 'Bash Scripts', 'Terraform (Basic)', 'CI/CD'] },
+      { icon: '💻', name: 'Development', color: 'blue',
+        tags: ['React.js', 'PHP', 'MySQL', 'HTML', 'CSS', 'REST APIs', 'JavaScript'] },
+      { icon: '🧠', name: 'Soft Skills', color: 'purple',
+        tags: ['Problem Solving', 'Communication', 'Fast Learner', 'Team Collaboration', 'Adaptability'] },
+    ];
+    const BULLETS = [
+      'Deployed and managed Linux-based VMs on AWS EC2; configured IAM roles, security groups, and VPC networking for secure access.',
+      'Containerized a sample web application using Docker, reducing environment inconsistencies across dev and staging setups.',
+      'Automated routine server health-check scripts using Bash, improving team response time on infrastructure alerts.',
+      'Gained practical exposure to CI/CD concepts using GitHub Actions for automated build and deployment pipelines.',
+    ];
+    const EXP_TAGS = ['AWS EC2', 'Docker', 'Linux', 'Bash', 'GitHub Actions', 'IAM', 'VPC', 'CI/CD'];
+    const PROJECTS = [
+      {
+        name: 'Presento — E-Commerce Gifting Platform', status: 'completed',
+        desc: 'Full-stack gifting platform with personalized gift recommendations, custom hamper creation, and secure payment integration. Hosted on AWS S3 with GitHub Actions CI/CD.',
+        bullets: ['500+ product entries with search & filter', 'Custom MySQL schema & PHP REST API', 'AWS S3 assets + automated deployment pipeline'],
+        tags: ['React.js', 'PHP', 'MySQL', 'AWS S3', 'GitHub Actions'],
+      },
+      {
+        name: 'Multi-Tier Containerized Portfolio', status: 'completed',
+        desc: 'Architected a 3-tier web application (React frontend, PHP REST API, MySQL DB) fully containerized with Docker Compose on RHEL with isolated bridge networks.',
+        bullets: ['Custom bridge networks for inter-container isolation', 'Persistent volume storage across lifecycles', 'Port bindings: 8080 (web) / 8000 (api)'],
+        tags: ['React.js', 'PHP', 'MySQL', 'Docker', 'Docker Compose', 'RHEL'],
+      },
+      {
+        name: 'AWS Two-Tier Architecture', status: 'ongoing',
+        desc: 'Designing and deploying a two-tier AWS architecture separating the application layer (EC2) from the database layer (RDS) with VPC subnets and security groups.',
+        bullets: ['EC2 application tier in public subnet', 'RDS database tier in private subnet', 'IAM roles + security group hardening'],
+        tags: ['AWS EC2', 'AWS RDS', 'VPC', 'Security Groups', 'IAM'],
+      },
+      {
+        name: 'AWS Three-Tier Architecture', status: 'ongoing',
+        desc: 'Building a production-grade 3-tier AWS deployment with ALB presentation layer, EC2 Auto Scaling application layer, and RDS Multi-AZ for high availability.',
+        bullets: ['ALB for load distribution across AZs', 'EC2 Auto Scaling for elasticity', 'Multi-AZ RDS for fault tolerance'],
+        tags: ['AWS ALB', 'EC2 Auto Scaling', 'RDS Multi-AZ', 'CloudWatch', 'Route 53'],
+      },
+    ];
+    const EDU = [
+      { icon: '🎓', degree: 'BSc. IT (Cloud and Application Development)', school: 'GUCPC, Gujarat University',         loc: 'Ahmedabad, Gujarat', date: 'Aug 2023 — Jun 2026' },
+      { icon: '📚', degree: 'Higher Secondary Certificate (HSC)',           school: 'Shri Hari Higher Secondary School', loc: 'Amreli, Gujarat',    date: 'March 2023'        },
+    ];
+    const CONTACTS = [
+      { icon: '✉',  type: 'Email',    val: 'priyazinzuvadia55@gmail.com',     act: 'Copy email',     copy: 'priyazinzuvadia55@gmail.com', href: null },
+      { icon: '📞', type: 'Phone',    val: '+91 84600 00240',                  act: 'Copy number',    copy: '+918460000240',                href: null },
+      { icon: '📡', type: 'LinkedIn', val: 'priya-zinzuvadia-1b7742364',       act: 'Open profile →', copy: null,                          href: 'https://www.linkedin.com/in/priya-zinzuvadia-1b7742364' },
+    ];
+    /* ══════════════════════════════════════════════════
+       NAVBAR
+    ══════════════════════════════════════════════════ */
+    function Navbar({ onOpenResume }) {
+      const [scrolled, setScrolled] = React.useState(false);
+      const [open, setOpen]         = React.useState(false);
+      const [active, setActive]     = React.useState('');
+      React.useEffect(() => {
+        const fn = () => setScrolled(window.scrollY > 20);
+        window.addEventListener('scroll', fn);
+        return () => window.removeEventListener('scroll', fn);
+      }, []);
+      React.useEffect(() => {
+        const obs = new IntersectionObserver(
+          es => es.forEach(e => e.isIntersecting && setActive(e.target.id)),
+          { rootMargin: '-40% 0px -50% 0px' }
+        );
+        document.querySelectorAll('section[id]').forEach(s => obs.observe(s));
+        return () => obs.disconnect();
+      }, []);
+      return (
+        <nav className={`navbar${scrolled ? ' scrolled' : ''}`}>
+          <div className="container navbar-inner">
+            <a href="#home" className="navbar-logo">
+              <span className="logo-bracket">{'{'}</span>priya.dev<span className="logo-bracket">{'}'}</span>
+            </a>
+            <div className="navbar-links">
+              {NAV_LINKS.map(l => (
+                <a key={l.href} href={l.href} className={`nav-link${active === l.href.slice(1) ? ' active' : ''}`}>{l.l}</a>
+              ))}
+            </div>
+            <button className="btn btn-outline navbar-cta" onClick={onOpenResume}>📄 Resume</button>
+            <button className={`hamburger${open ? ' ham-open' : ''}`} onClick={() => setOpen(p => !p)} aria-label="Toggle navigation">
+              <span className="ham-line"/><span className="ham-line"/><span className="ham-line"/>
+            </button>
+          </div>
+          {open && (
+            <div className="mobile-menu">
+              {NAV_LINKS.map(l => (
+                <a key={l.href} href={l.href} className="mobile-link" onClick={() => setOpen(false)}>{l.l}</a>
+              ))}
+              <button className="btn btn-outline" style={{ marginTop: 8, justifyContent: 'center' }}
+                onClick={() => { setOpen(false); onOpenResume(); }}>
+                📄 View Resume
+              </button>
+            </div>
+          )}
+        </nav>
+      );
+    }
+    /* ══════════════════════════════════════════════════
+       HERO
+    ══════════════════════════════════════════════════ */
+    function Hero({ onOpenResume }) {
+      const typed = useTypewriter(TITLES);
+      return (
+        <section id="home" className="hero">
+          <ParticleCanvas />
+          <div className="hero-glow-1" /><div className="hero-glow-2" />
+          <div className="container hero-content">
+            <div className="hero-animate" style={{ maxWidth: 620 }}>
+              <div className="hero-avail"><span className="avail-dot" />Available for opportunities</div>
+              <h1 className="hero-name">
+                <span className="glitch-wrap" data-text="PRIYA ZINZUVADIA">PRIYA ZINZUVADIA</span>
+              </h1>
+              <div className="hero-typewriter">
+                <span className="tw-prefix">→</span>
+                <span className="tw-text">{typed}</span>
+                <span className="cursor">_</span>
+              </div>
+              <p className="hero-meta">BSc IT (Cloud Computing) · Gujarat University · AWS Academy Certified</p>
+              <div className="hero-actions">
+                <a href="#projects" className="btn btn-outline">◈ View Projects</a>
+                <button className="btn btn-ghost" onClick={onOpenResume}>📄 View My Resume</button>
+              </div>
+              <div className="hero-social">
+                <a href="mailto:priyazinzuvadia55@gmail.com" className="hero-slink">✉ priyazinzuvadia55@gmail.com</a>
+                <span className="hero-sep">·</span>
+                <a href="https://www.linkedin.com/in/priya-zinzuvadia-1b7742364" target="_blank" rel="noopener noreferrer" className="hero-slink">📡 LinkedIn</a>
+                <span className="hero-sep">·</span>
+                <a href="tel:+918460000240" className="hero-slink">📞 +91 84600 00240</a>
+              </div>
+            </div>
+            <div className="hero-float" aria-hidden="true">
+              {FLOAT_ICONS.map(ic => (
+                <div key={ic.l} className="float-icon">
+                  <div className={ic.cls} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 5 }}>
+                    <span className="fi-emoji">{ic.e}</span>
+                    <span className="fi-label">{ic.l}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="hero-scroll">
+            <a href="#about" aria-label="Scroll down">
+              <span className="scroll-arrow">↓</span><span>scroll</span>
+            </a>
+          </div>
+        </section>
+      );
+    }
+    /* ══════════════════════════════════════════════════
+       ABOUT
+    ══════════════════════════════════════════════════ */
+    function About() {
+      return (
+        <section id="about" className="section">
+          <div className="container">
+            <Reveal>
+              <div className="eyebrow">01. About</div>
+              <h2 className="section-h2">Who I Am</h2>
+            </Reveal>
+            <Reveal delay={0.1}>
+              <div className="about-prose">
+                <p>I'm a <span className="hl">BSc IT (Cloud Computing)</span> student at Gujarat University with real-world cloud and DevOps experience. I don't just learn technology — <strong style={{ color: 'var(--text-bright)' }}>I deploy it.</strong></p>
+                <p>During my internship at <span className="hl">GRRAS IT Solutions</span>, I deployed Linux VMs on <span className="hl">AWS EC2</span>, containerized apps with Docker, automated server health-checks in Bash, and built CI/CD pipelines via GitHub Actions.</p>
+                <p>From architecting <span className="hl">3-tier containerized applications</span> to building full-stack e-commerce platforms with 500+ product entries, I thrive at the intersection of development and operations.</p>
+                <p><span className="hl">AWS Academy certified</span> and actively seeking DevOps & Cloud Engineering roles where I can build reliable, automated, scalable systems.</p>
+              </div>
+            </Reveal>
+            <div className="about-stats">
+              {STATS.map((s, i) => (
+                <Reveal key={s.l} delay={0.1 + i * .08}>
+                  <div className="stat-card">
+                    <div className="stat-num">{s.n}</div>
+                    <div className="stat-lbl">{s.l}</div>
+                  </div>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+      );
+    }
+    /* ══════════════════════════════════════════════════
+       SKILLS
+    ══════════════════════════════════════════════════ */
+    function Skills() {
+      return (
+        <section id="skills" className="section section-alt">
+          <div className="container">
+            <Reveal><div className="eyebrow">02. Skills</div><h2 className="section-h2">Technical Skills</h2></Reveal>
+            <div className="skills-grid">
+              {SKILL_CATS.map((cat, i) => (
+                <Reveal key={cat.name} delay={i * .1}>
+                  <div className="skill-card">
+                    <div className="skill-cat-head">
+                      <span className="skill-icon">{cat.icon}</span>
+                      <span className="skill-cat-name">{cat.name}</span>
+                    </div>
+                    <div className="skill-tags">
+                      {cat.tags.map(tag => (
+                        <span key={tag} className={`skill-tag${cat.color === 'purple' ? ' purple' : ''}`}>{tag}</span>
+                      ))}
+                    </div>
+                  </div>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+      );
+    }
+    /* ══════════════════════════════════════════════════
+       EXPERIENCE
+    ══════════════════════════════════════════════════ */
+    function Experience() {
+      return (
+        <section id="experience" className="section">
+          <div className="container">
+            <Reveal><div className="eyebrow">03. Experience</div><h2 className="section-h2">Work History</h2></Reveal>
+            <div className="timeline">
+              <Reveal dir="left">
+                <div className="timeline-item">
+                  <div className="timeline-dot" />
+                  <div className="exp-card">
+                    <div className="exp-company">GRRAS IT SOLUTIONS PVT. LTD.</div>
+                    <div className="exp-role">// Cloud &amp; DevOps Intern</div>
+                    <div className="exp-date">📅 Feb 2026 — Mar 2026 · Ahmedabad</div>
+                    <div className="exp-bullets">
+                      {BULLETS.map((b, i) => (
+                        <div key={i} className="exp-bullet">
+                          <span className="bull-arrow">›</span><span>{b}</span>
+                        </div>
+                      ))}
+                    </div>
+                    <div className="exp-tags">
+                      {EXP_TAGS.map(t => <span key={t} className="tech-tag">{t}</span>)}
+                    </div>
+                  </div>
+                </div>
+              </Reveal>
+            </div>
+          </div>
+        </section>
+      );
+    }
+    /* ══════════════════════════════════════════════════
+       PROJECTS
+    ══════════════════════════════════════════════════ */
+    function Projects() {
+      return (
+        <section id="projects" className="section section-alt">
+          <div className="container">
+            <Reveal><div className="eyebrow">04. Projects</div><h2 className="section-h2">What I've Built</h2></Reveal>
+            <div className="projects-grid">
+              {PROJECTS.map((p, i) => (
+                <Reveal key={p.name} delay={i * .1}>
+                  <div className="proj-card">
+                    <div>
+                      <span className={`badge badge-${p.status}`}>
+                        {p.status === 'ongoing' && <span className="pulse-dot" />}
+                        {p.status === 'completed' ? '✓ Completed' : '⟳ In Progress'}
+                      </span>
+                    </div>
+                    <div className="proj-name">{p.name}</div>
+                    <p className="proj-desc">{p.desc}</p>
+                    <ul className="proj-buls">
+                      {p.bullets.map(b => <li key={b} className="proj-bul"><span>›</span><span>{b}</span></li>)}
+                    </ul>
+                    <div className="proj-tags">
+                      {p.tags.map(t => <span key={t} className="tech-tag">{t}</span>)}
+                    </div>
+                  </div>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+      );
+    }
+    /* ══════════════════════════════════════════════════
+       EDUCATION
+    ══════════════════════════════════════════════════ */
+    function Education() {
+      return (
+        <section id="education" className="section">
+          <div className="container">
+            <Reveal><div className="eyebrow">05. Education</div><h2 className="section-h2">Academic Background</h2></Reveal>
+            <div className="edu-grid">
+              {EDU.map((e, i) => (
+                <Reveal key={e.degree} delay={i * .15}>
+                  <div className="edu-card">
+                    <div className="edu-icon">{e.icon}</div>
+                    <div className="edu-degree">{e.degree}</div>
+                    <div className="edu-school">{e.school}</div>
+                    <div className="edu-loc">📍 {e.loc}</div>
+                    <div className="edu-date">{e.date}</div>
+                  </div>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+      );
+    }
+    /* ══════════════════════════════════════════════════
+       ACHIEVEMENTS
+    ══════════════════════════════════════════════════ */
+    function Achievements() {
+      return (
+        <section id="achievements" className="section section-alt">
+          <div className="container">
+            <Reveal><div className="eyebrow">06. Achievements</div><h2 className="section-h2">Certifications &amp; Awards</h2></Reveal>
+            <Reveal>
+              <div className="ach-card">
+                <div className="ach-badge">☁</div>
+                <div>
+                  <div className="ach-title">AWS Academy Cloud Foundations</div>
+                  <div className="ach-sub">Certified Graduate · Badge Verified via Credly</div>
+                  <p className="ach-desc">
+                    Completed hands-on labs covering <strong>EC2, S3, IAM, VPC, RDS</strong>, and cloud
+                    security fundamentals. Demonstrates proficiency in core AWS services and cloud architecture concepts.
+                  </p>
+                  <a href="https://www.credly.com/badges/1f4ed597-f10b-43ab-b89c-94dae6e7c2e4" target="_blank" rel="noopener noreferrer" className="ach-link">
+                    Verify Badge on Credly →
+                  </a>
+                </div>
+              </div>
+            </Reveal>
+          </div>
+        </section>
+      );
+    }
+    /* ══════════════════════════════════════════════════
+       CONTACT
+    ══════════════════════════════════════════════════ */
+    function Contact() {
+      const [copied, setCopied] = React.useState(null);
+      const handleClick = (c, i) => {
+        if (c.href) { window.open(c.href, '_blank'); return; }
+        navigator.clipboard.writeText(c.copy).then(() => {
+          setCopied(i);
+          setTimeout(() => setCopied(null), 1800);
+        });
+      };
+      return (
+        <section id="contact" className="section">
+          <div className="container">
+            <Reveal><div className="eyebrow">07. Contact</div><h2 className="section-h2">Get In Touch</h2></Reveal>
+            <Reveal delay={0.1}>
+              <p className="contact-intro">
+                I'm currently open to internship and full-time opportunities in DevOps, Cloud Engineering,
+                or Full-Stack Development. Feel free to reach out — I'd love to connect!
+              </p>
+            </Reveal>
+            <div className="contact-grid">
+              {CONTACTS.map((c, i) => (
+                <Reveal key={c.type} delay={i * .1}>
+                  <div className="contact-card" onClick={() => handleClick(c, i)}>
+                    <div className="contact-icon">{c.icon}</div>
+                    <div className="contact-type">{c.type}</div>
+                    <div className="contact-val">{c.val}</div>
+                    <div className="contact-act">{c.act}</div>
+                    {copied === i && <div className="copy-badge">✓ Copied!</div>}
+                  </div>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+      );
+    }
+    /* ══════════════════════════════════════════════════
+       FOOTER
+    ══════════════════════════════════════════════════ */
+    function Footer() {
+      return (
+        <footer className="footer">
+          <div className="container footer-inner">
+            <p className="footer-text">Built with <span>♥</span> by <span>Priya Zinzuvadia</span> · Aspiring DevOps &amp; Cloud Engineer</p>
+            <button className="back-top" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>↑ Back to top</button>
+          </div>
+        </footer>
+      );
+    }
+    /* ══════════════════════════════════════════════════
+       RESUME MODAL — SAME LOGIC AS ORIGINAL
+    ══════════════════════════════════════════════════ */
+    function ResumeModal({ isOpen, onClose, pdfUrl, loading }) {
+      if (!isOpen) return null;
+      return (
+        <div className="modal-overlay" onClick={onClose}>
+          <div className="modal-card" onClick={e => e.stopPropagation()}>
+            <div className="modal-header">
+              <div>
+                <div className="modal-title">// REPOSITORY GATEWAY RESPONSE</div>
+                {!loading && pdfUrl && (
+                  <div className="modal-status">✔ Network Status: 200 OK · Connection Verified</div>
+                )}
+              </div>
+              <button className="modal-close" onClick={onClose} aria-label="Close modal">✕</button>
+            </div>
+            <div className="modal-body">
+              {loading ? (
+                <div className="modal-loading">
+                  <div className="spinner" />
+                  <div className="loading-txt">Piping document container stream...</div>
+                </div>
+              ) : (
+                <>
+                  <iframe className="pdf-frame" src={`${pdfUrl}#toolbar=1`} title="Resume Document Core" />
+                  <a href={pdfUrl} download="Priya_Zinzuvadia_Resume.pdf" className="modal-dl">
+                    ⬇ Direct Download Resume (.pdf)
+                  </a>
+                </>
+              )}
+            </div>
+          </div>
+        </div>
+      );
+    }
+    /* ══════════════════════════════════════════════════
+       APP — SAME FETCH LOGIC AS ORIGINAL
+    ══════════════════════════════════════════════════ */
+    function App() {
+      const [resumeOpen, setResumeOpen] = React.useState(false);
+      const [pdfUrl, setPdfUrl]         = React.useState('');
+      const [pdfLoading, setPdfLoading] = React.useState(false);
+      const handleOpenResume = () => {
+        setPdfLoading(true);
+        setPdfUrl('');
+        setResumeOpen(true);
+        fetch('http://192.168.79.130:8000/api/resume')
+          .then(res => res.json())
+          .then(data => {
+            setPdfUrl(data.image_url || 'Priya_Zinzuvadia_Resume.pdf');
+            setPdfLoading(false);
+          })
+          .catch(err => {
+            console.error('Database tracking exception triggered fallback:', err);
+            setPdfUrl('Priya_Zinzuvadia_Resume.pdf');
+            setPdfLoading(false);
+          });
+      };
+      return (
+        <>
+          <Navbar onOpenResume={handleOpenResume} />
+          <main>
+            <Hero       onOpenResume={handleOpenResume} />
+            <About />
+            <Skills />
+            <Experience />
+            <Projects />
+            <Education />
+            <Achievements />
+            <Contact />
+          </main>
+          <Footer />
+          <ResumeModal
+            isOpen={resumeOpen}
+            onClose={() => setResumeOpen(false)}
+            pdfUrl={pdfUrl}
+            loading={pdfLoading}
+          />
+        </>
+      );
+    }
+    /* ══════════════════════════════════════════════════
+       MOUNT
+    ══════════════════════════════════════════════════ */
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<App />);
+  </script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+version: '3.8'
+
+services:
+  # TIER 1: THE FRONTEND USER INTERFACE LAYER
+  frontend:
+    build: ./frontend
+    container_name: portfolio_frontend
+    ports:
+      - "8080:80"
+    networks:
+      - portfolio_net
+    restart: always
+
+  # TIER 2: THE BACKEND APPLICATION LOGIC LAYER
+  backend:
+    build: ./backend
+    container_name: portfolio_backend
+    ports:
+      - "8000:80"
+    volumes:
+      - ./backend:/var/www/html
+    networks:
+      - portfolio_net
+    depends_on:
+      - db
+    restart: always
+
+  # TIER 3: THE DATABASE STORAGE LAYER
+  db:
+    image: mysql:8.0
+    container_name: portfolio_database
+    environment:
+      MYSQL_ROOT_PASSWORD: root_secure_pass
+      MYSQL_DATABASE: portfolio_db
+      MYSQL_USER: portfolio_user
+      MYSQL_PASSWORD: portfolio_secure_pass
+    ports:
+      - "3306:3306"
+    volumes:
+      # Persists raw database blocks directly to your RHEL host disk drive
+      - db_data:/var/lib/mysql
+      # Inject our schema initialization script on container boot
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - portfolio_net
+    restart: always
+
+networks:
+  portfolio_net:
+    driver: bridge
+
+volumes:
+  db_data:
