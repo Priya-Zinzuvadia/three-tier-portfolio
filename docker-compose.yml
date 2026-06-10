@@ -3,7 +3,7 @@ version: '3.8'
 services:
   # TIER 1: THE FRONTEND USER INTERFACE LAYER
   frontend:
-    build: ./frontend
+    image: local-frontend:latest
     container_name: portfolio_frontend
     ports:
       - "8080:80"
@@ -13,7 +13,7 @@ services:
 
   # TIER 2: THE BACKEND APPLICATION LOGIC LAYER
   backend:
-    build: ./backend
+    image: local-backend:latest
     container_name: portfolio_backend
     ports:
       - "8000:80"
@@ -37,9 +37,7 @@ services:
     ports:
       - "3306:3306"
     volumes:
-      # Persists raw database blocks directly to your RHEL host disk drive
       - db_data:/var/lib/mysql
-      # Inject our schema initialization script on container boot
       - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
     networks:
       - portfolio_net
