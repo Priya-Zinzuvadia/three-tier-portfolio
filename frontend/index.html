@@ -451,9 +451,7 @@
       return (
         <nav className={`navbar${scrolled ? ' scrolled' : ''}`}>
           <div className="container navbar-inner">
-            <a href="#home" className="navbar-logo">
-              <span className="logo-bracket">{'{'}</span>Priya<span className="logo-bracket">{'}'}</span>
-            </a>
+            <a href="#home" className="navbar-logo">Priya</a>
             <div className="navbar-links">
               {NAV_LINKS.map(l => (
                 <a key={l.href} href={l.href} className={`nav-link${active === l.href.slice(1) ? ' active' : ''}`}>{l.l}</a>
