@@ -23,7 +23,7 @@ jobs:
         with:
           context: ./backend
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/portfolio:latest
+          tags: priyazinzu/portfolio:latest
 
       - name: Deploy to EC2
         uses: appleboy/ssh-action@v1.0.3
