@@ -7,7 +7,6 @@ on:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -18,23 +17,32 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Build and push image
+      # 1. This builds your backend
+      - name: Build and push Backend image
         uses: docker/build-push-action@v5
         with:
           context: ./backend
           push: true
-          tags: priyazinzu/portfolio:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/portfolio-backend:latest
 
+      # 2. ADD THIS NEW BLOCK TO BUILD YOUR FRONTEND
+      - name: Build and push Frontend image
+        uses: docker/build-push-action@v5
+        with:
+          context: ./frontend
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/portfolio-frontend:latest
+
+      # 3. This deploys everything to your EC2 instance
       - name: Deploy to EC2
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ec2-user
           key: ${{ secrets.EC2_SSH_KEY }}
-          debug: true
           script: |
             cd ~/three-tier-portfolio
             git pull origin main
             docker-compose down
-            docker-compose up -d
+            docker-compose up -d --build
             docker-compose ps

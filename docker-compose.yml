@@ -3,7 +3,7 @@ version: '3.8'
 services:
   # TIER 1: THE FRONTEND USER INTERFACE LAYER
   frontend:
-    image: local-frontend:latest
+    image: priyazinzu/portfolio-frontend:latest
     container_name: portfolio_frontend
     ports:
       - "8080:80"
@@ -13,12 +13,10 @@ services:
 
   # TIER 2: THE BACKEND APPLICATION LOGIC LAYER
   backend:
-    image: local-backend:latest
+    image: priyazinzu/portfolio-backend:latest
     container_name: portfolio_backend
     ports:
       - "8000:80"
-    volumes:
-      - ./backend:/var/www/html
     networks:
       - portfolio_net
     depends_on:
@@ -43,9 +41,12 @@ services:
       - portfolio_net
     restart: always
 
+# CUSTOM VIRTUAL NETWORK DEFINITION
 networks:
   portfolio_net:
     driver: bridge
 
+# PERSISTENT STORAGE VOLUME DEFINITION FOR MYSQL
 volumes:
   db_data:
+    driver: local
